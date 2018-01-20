@@ -5,7 +5,7 @@ pub struct point_t {
 }
 
 #[derive(Debug, Copy, Clone)]
-pub struct queue_t {
+pub struct Queue_t {
     pub tail :point_t
     pub head :point_t
 }

@@ -1,23 +1,20 @@
-#[derive(Debug, Copy, Clone)]
-pub struct point_t {
-    pub ptr :&node_t
-    pub tag :u64
+use std::sync::atomic::AtomicPtr;
+
+#[derive(Debug)]
+pub struct Point_t<T> {
+    pub ptr: AtomicPtr<Node_t<T>>,
+    pub tag: u64,
 }
 
-#[derive(Debug, Copy, Clone)]
-pub struct Queue_t {
-    pub tail :point_t
-    pub head :point_t
+#[derive(Debug)]
+pub struct Queue_t<T> {
+    pub tail: AtomicPtr<Point_t<T>>,
+    pub head: AtomicPtr<Point_t<T>>,
 }
 
-#[derive(Debug, Copy, Clone)]
-pub struct node_t {
-    data :data_t
-    next :point_t
-    prev :point_t
-}
-
-enum data_t {
-    Op(Operator),
-    Number(i32)
+#[derive(Debug)]
+pub struct Node_t<T> {
+    pub data: Option<T>,
+    pub next: AtomicPtr<Point_t<T>>,
+    pub prev: AtomicPtr<Point_t<T>>,
 }

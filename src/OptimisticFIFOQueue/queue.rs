@@ -4,8 +4,8 @@ use OptimisticFIFOQueue::node::Point;
 use OptimisticFIFOQueue::node::Node;
 use std::sync::atomic::AtomicPtr;
 
-impl<T> Queue<T> {
-    pub fn new() -> Queue<T> {
+impl<T> Default for Queue<T> {
+    fn default() -> Queue<T> {
         let mut tail_n = Node {
             next: AtomicPtr::new(ptr::null_mut()),
             prev: AtomicPtr::new(ptr::null_mut()),
@@ -21,5 +21,11 @@ impl<T> Queue<T> {
                 ptr: AtomicPtr::new(&mut tail_n),
             }),
         }
+    }
+}
+
+impl<T> Queue<T> {
+    pub fn new() -> Queue<T> {
+        Queue::default()          
     }
 }
